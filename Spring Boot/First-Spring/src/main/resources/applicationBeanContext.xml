@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--bean definitions here -->
+    <bean id="myBean" class="com.example.demo.GreetingService">
+    </bean>
+
+    <bean id="EmailNotificationService" class="com.example.loose.EmailNotificationService">
+    </bean>
+
+    <bean id="SmsNotificationService" class="com.example.loose.SmsNotificationService">
+    </bean>
+
+    <bean id="UserServiceEmail" class="com.example.loose.UserService" >
+        <property name="notificationService" ref="EmailNotificationService">
+        </property>
+    </bean>
+
+     <bean id="UserServiceSms" class="com.example.loose.UserService">
+<!--         // setter ki help se ye ho rhi hai-->
+<!--         <property name="notificationService" ref="SmsNotificationService">-->
+<!--         </property>-->
+
+<!--         // Constructor ki Help se ye ho rhi hai-->
+         <constructor-arg ref="SmsNotificationService"/>
+
+     </bean>
+
+</beans>
